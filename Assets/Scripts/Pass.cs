@@ -9,7 +9,7 @@ public class Pass : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Train"))
+        if (other.gameObject.CompareTag("Train"))
         {
             pointToAdd.Invoke();
         }
