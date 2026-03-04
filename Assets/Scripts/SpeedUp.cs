@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public bool acceleration;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void OnSpeedUp()
     {
-        
+        if (acceleration == true)
+        {
+            Time.timeScale = 2;
+            acceleration = false;
+            Debug.Log("ACCELERATION");
+        }
+        else
+        {
+            Time.timeScale = 1;
+            acceleration = true;
+            Debug.Log("BACK to normal");
+        }
     }
 }
