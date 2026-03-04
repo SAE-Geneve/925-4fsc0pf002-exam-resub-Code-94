@@ -10,7 +10,7 @@ public class Junction : MonoBehaviour
 
     [SerializeField] private List<SplineContainer> _outs;
     [SerializeField] private GameObject greenFlag;
-    [SerializeField] private GameObject redFlag;
+    
     public SplineContainer NextTrack => _outs[_nextTrackIdx];
     
     private Camera _camera;
@@ -25,10 +25,14 @@ public class Junction : MonoBehaviour
     void Update()
     {
         
-        greenFlag.SetActive(false);
-        redFlag.SetActive(true);
         if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
             CheckRaycastClick();
+            StartCoroutine(FlagAppearance(2f));
+        }
+            
+        
+        
     }
 
     private void CheckRaycastClick()
@@ -36,11 +40,11 @@ public class Junction : MonoBehaviour
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = _camera.ScreenPointToRay(mousePos);
 
+        
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            StartCoroutine(FlagAppearance(2f));
-
-
+            OnClicked();
+            
         }
             
         
@@ -56,10 +60,11 @@ public class Junction : MonoBehaviour
 
     private IEnumerator FlagAppearance(float waitSecond)
     {
-        greenFlag.SetActive(true);
-        redFlag.SetActive(false);
         
+        greenFlag.SetActive(true);
         yield return new WaitForSeconds(waitSecond);
-        OnClicked();
+        greenFlag.SetActive(false);
+        
+        
     }
 }
