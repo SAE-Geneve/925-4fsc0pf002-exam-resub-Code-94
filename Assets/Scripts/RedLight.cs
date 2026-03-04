@@ -24,6 +24,7 @@ public class RedLight : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
             OnClicked();
+        
     }
 
     private void OnClicked()
